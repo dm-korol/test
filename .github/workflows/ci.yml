@@ -47,7 +47,7 @@ jobs:
           aws-region: us-east-1
       - name: test aws cli
         run: |
-          aws 
+          aws help
 
 
       - run: echo "Optional Recreate RDS !"
