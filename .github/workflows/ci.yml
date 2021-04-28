@@ -11,6 +11,8 @@ on:
         required: false
         default: 'test' 
 
+
+
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
@@ -37,7 +39,13 @@ jobs:
       - run: echo "run unit tests" 
       - run: echo " run integration test"
       - run: echo "push new artifact"
+      - name: Configure AWS credentials from Test account
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
       - run: echo "Optional Recreate RDS !"
       - run: echo "deploy new version"
       - run: echo "Hello ${{ github.event.inputs.name }}!"
-
