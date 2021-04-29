@@ -38,6 +38,10 @@ jobs:
         run: ./gradlew build
       - run: echo "run unit tests" 
       - run: echo " run integration test"
+      - uses: actions/upload-artifact@v2
+        with:
+          name: integration-tests-reports
+          path: test 
       - run: echo "push new artifact"
       - name: Configure AWS credentials from Test account
         uses: aws-actions/configure-aws-credentials@v1
