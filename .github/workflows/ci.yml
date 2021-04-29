@@ -2,10 +2,10 @@ name: Base CI
 on:
   workflow_dispatch:
     inputs:
-      name:
+      rds:
         description: 'REdeploy RDS '
         required: true
-        default: 'false'
+        default: 'no'
       test:
         description: 'test'
         required: false
@@ -50,10 +50,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       - name: test aws cli
+        if: ${{ github.event.inputs.rds == 'yes' }}
         run: |
           aws help
 
 
       - run: echo "Optional Recreate RDS !"
       - run: echo "deploy new version"
-      - run: echo "Hello ${{ github.event.inputs.name }}!"
