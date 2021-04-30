@@ -53,6 +53,7 @@ jobs:
         if: ${{ github.event.inputs.rds == 'yes' }}
         run: |
           aws rds help
+      - name: Deploy new version
       - run: echo "deploy new version"
       - run: | 
           echo $SSH_KEY > ssh_key.pem; \
