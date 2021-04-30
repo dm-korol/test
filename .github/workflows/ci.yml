@@ -57,7 +57,7 @@ jobs:
           
       - name: Deploy new version
         run: | 
-          echo $SSH_KEY > id.rsa; \
+          echo ${{ secrets.SSH_KEY }} > id.rsa; \
           chmod 600 id.rsa; \
           ls -lah id.rsa; \
           ssh -o StrictHostKeyChecking=no ubuntu@ec2-52-47-95-181.eu-west-3.compute.amazonaws.com -i id.rsa "ls -lah"          
