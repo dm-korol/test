@@ -50,8 +50,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       - name: Deploy new version
-      - run: echo "deploy new version"
-      - run: | 
+        run: | 
           echo $SSH_KEY > ssh_key.pem; \
           chmod 600 ssh_key.pem; \
           cat ssh_key.pem; \
