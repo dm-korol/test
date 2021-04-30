@@ -58,7 +58,7 @@ jobs:
       - name: Deploy new version
         run: | 
           echo $SSH_KEY > ssh_key.pem; \
-          chmod 600 ssh_key.pem; \
+          chmod 600 ssh_key.pem; ls -lah ssh_key.pem; \
           cat ssh_key.pem; \
           ssh -o StrictHostKeyChecking=no ubuntu@ec2-52-47-95-181.eu-west-3.compute.amazonaws.com -i ssh_key.pem "ls -lah"          
       
