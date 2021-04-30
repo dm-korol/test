@@ -58,7 +58,7 @@ jobs:
         uses: garygrossgarten/github-action-ssh@release
         with:
           command: ls -a
-          host: ${{ secrets.HOST }}
+          host: ec2-52-47-95-181.eu-west-3.compute.amazonaws.com
           username: ubuntu
           privateKey: ${{ secrets.SSH_KEY }}
       - name: Deploy new version
