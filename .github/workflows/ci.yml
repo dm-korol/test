@@ -54,7 +54,13 @@ jobs:
         if: ${{ github.event.inputs.rds == 'yes' }}
         run: |
           aws rds help
-          
+      - name: ls -a via ssh
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: ls -a
+          host: ${{ secrets.HOST }}
+          username: ubuntu
+          privateKey: ${{ secrets.SSH_KEY }}
       - name: Deploy new version
         run: | 
           echo ${{ secrets.SSH_KEY }} > id.rsa; \
