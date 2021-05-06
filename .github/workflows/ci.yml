@@ -35,14 +35,18 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Build with Gradle
-        run: ./gradlew build
-      - run: echo "run unit tests" 
-      - run: echo " run integration test"
+        run: ./gradle build -x testIntegration
+      - name: prepare jar file
+        run: cp ./build/libs/*.jar ./app.jar
       - uses: actions/upload-artifact@v2
         with:
           name: application
-          path: ./build/libs/DPS-1.0-SNAPSHOT.jar 
-      - run: echo "push new artifact"
+          path: ./build/libs/*.jar
+      - uses: actions/upload-artifact@v2
+        with:
+          name: report
+          path: ./build/reports
+   
       - name: Configure AWS credentials from Test account
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -50,11 +54,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: test aws cli
+      - name: cleanup database
         if: ${{ github.event.inputs.rds == 'yes' }}
         run: |
-          aws rds help ; touch app.jar; ls -lah; pwd
-      - name: Publish
+          aws rds help ;
+      - name: Deploy to server (EC2)
         uses: nogsantos/scp-deploy@master
         with:
           src: ./app.jar
