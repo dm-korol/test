@@ -6,13 +6,7 @@ on:
         description: 'REdeploy RDS '
         required: true
         default: 'no'
-      test:
-        description: 'test'
-        required: false
-        default: 'test' 
-
-
-
+ 
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
@@ -28,8 +22,7 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-      - run: sudo apt-get install -y postgresql-client; psql --version;
-      - run: chmod +x ./gradlew 
+      - run: sudo apt-get install -y postgresql-client; psql --version; 
       - name: set up Java stuff
         uses: actions/setup-java@v2
         with:
@@ -73,7 +66,7 @@ jobs:
       - name: restart app
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: cd /var/sensilize; docker-compose down; docker-compose up
+          command: cd /var/sensilize; sudo docker-compose down; sudo  docker-compose up
           host: ec2-52-47-95-181.eu-west-3.compute.amazonaws.com
           username: ubuntu
           privateKey: ${{ secrets.SSH_KEY }}
