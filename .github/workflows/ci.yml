@@ -54,17 +54,21 @@ jobs:
         if: ${{ github.event.inputs.rds == 'yes' }}
         run: |
           aws rds help
+      - name: Publish
+        uses: nogsantos/scp-deploy@master
+        with:
+          src: ./app.jar
+          host: ec2-52-47-95-181.eu-west-3.compute.amazonaws.com
+          remote: /var/sensilize
+          port: 22
+          user: ubuntu
+          key: ${{ secrets.SSH_KEY }}
       - name: ls -a via ssh
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: ls -a
+          command: ls -a /var/sensilize
           host: ec2-52-47-95-181.eu-west-3.compute.amazonaws.com
           username: ubuntu
           privateKey: ${{ secrets.SSH_KEY }}
-      - name: Deploy new version
-        run: | 
-          echo ${{ secrets.SSH_KEY }} > id.rsa; \
-          chmod 600 id.rsa; \
-          ls -lah id.rsa; \
-          ssh -o StrictHostKeyChecking=no ubuntu@ec2-52-47-95-181.eu-west-3.compute.amazonaws.com -i id.rsa "ls -lah"          
+              
       
