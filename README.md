@@ -31,7 +31,9 @@ Java 11\
 Gradle\
 PostgreSQL\
 OpenAPI\
-Lombok
+Lombok\
+TestNg\
+RestAssured
 
 ## Setup & Build
 
@@ -49,13 +51,19 @@ NOTE: tables will be created if not exists
 
 5. To build the application run:
 ```
-gradle build
+gradle build -x testIntegration
 ```
-6. To start with docker run:
+6.To run integration tests
+```
+gradle testIntegration
+* Database should be up and have all neded data for aplication
+* Application should be running and listing on localhost:8080
+```
+7. To start with docker run:
 ```
 docker-compose build && docker-compose-debug up
 ```
-7. To start docker in debug mode (only database) run:
+8. To start docker in debug mode (only database) run:
 ```
 docker-compose -f docker-compose.debug.yaml up --build
 ```

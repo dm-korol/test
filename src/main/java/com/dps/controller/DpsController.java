@@ -3,9 +3,8 @@ package com.dps.controller;
 import com.dps.service.DpsService;
 import com.dps.vo.CropVO;
 import com.dps.vo.FieldVO;
-import com.dps.vo.SoilPropsVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,38 +18,23 @@ public class DpsController {
         this.dpsService = dpsService;
     }
 
-    /*
-     *   parameters:
-     *   lon - field longitude
-     *   lat - field latitude
-     *  id - field id
-     */
     @PostMapping(path = "/field")
-    public SoilPropsVO addField(@RequestBody FieldVO fieldVO) {
-        SoilPropsVO res = dpsService.addField(fieldVO);
-        return res;
+    public ResponseEntity<String> addField(@RequestBody FieldVO fieldVO) {
+        return dpsService.addField(fieldVO);
     }
 
     @PostMapping(path = "/crop")
-    public void addCrop(@RequestBody CropVO cropVO) {
-        dpsService.addCrop(cropVO);
+    public ResponseEntity<String> addCrop(@RequestBody CropVO cropVO) {
+        return dpsService.addCrop(cropVO);
     }
 
     @GetMapping(path = "/crop/{id}")
-    public CropVO getCrop(@PathVariable("id") Integer id) {
+    public ResponseEntity<String> getCrop(@PathVariable("id") Integer id) {
         return dpsService.getCrop(id);
     }
 
     @GetMapping(path = "/live")
-    public HttpStatus getStatus() {
-
-        // TODO: examples:
-        // 200
-        HttpStatus statusOk = HttpStatus.OK;
-
-        // 503
-        HttpStatus statusUnavailable = HttpStatus.SERVICE_UNAVAILABLE;
-
-        return statusOk;
+    public ResponseEntity<String> getStatus() {
+        return dpsService.checkDatabases();
     }
 }

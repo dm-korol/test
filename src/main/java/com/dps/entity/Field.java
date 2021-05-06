@@ -11,8 +11,8 @@ public class Field {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+   // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer fieldId;
 
     @Column(name = "longitude")
     private Double longitude;
@@ -20,8 +20,8 @@ public class Field {
     @Column(name = "latitude")
     private Double latitude;
 
-    @Column(name = "field_id")
-    private Integer fieldId;
+/*    @Column(name = "field_id")
+    private Integer fieldId;*/
 
     @Column(name = "soil_type")
     private String soilType;

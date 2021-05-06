@@ -1,13 +1,13 @@
 DROP TABLE IF EXISTS field CASCADE;
 DROP TABLE IF EXISTS crop;
 DROP TABLE IF EXISTS soil_humidity;
+DROP TABLE IF EXISTS saturated_over_water;
 
 CREATE TABLE IF NOT EXISTS field
 (
-    id        INT GENERATED ALWAYS AS IDENTITY,
+    id INT,
     longitude DOUBLE PRECISION NOT NULL,
     latitude  DOUBLE PRECISION NOT NULL,
-    field_id  INT              NOT NULL,
     soil_type VARCHAR(255),
     PRIMARY KEY (id)
 );
@@ -37,4 +37,20 @@ CREATE TABLE IF NOT EXISTS soil_humidity
     wilting    FLOAT        NOT NULL,
     water      FLOAT        NOT NULL,
     saturation FLOAT        NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS saturated_over_water
+(
+    temp  INT UNIQUE NOT NULL,
+    zero  FLOAT      NOT NULL,
+    one   FLOAT      NOT NULL,
+    two   FLOAT      NOT NULL,
+    three FLOAT      NOT NULL,
+    four  FLOAT      NOT NULL,
+    five  FLOAT      NOT NULL,
+    six   FLOAT      NOT NULL,
+    seven FLOAT      NOT NULL,
+    eight FLOAT      NOT NULL,
+    nine  FLOAT      NOT NULL,
+    PRIMARY KEY (temp)
 );
