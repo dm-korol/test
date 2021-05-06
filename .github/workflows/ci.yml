@@ -35,7 +35,7 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Build with Gradle
-        run: ./gradle build -x testIntegration
+        run: gradle build -x testIntegration
       - name: prepare jar file
         run: cp ./build/libs/*.jar ./app.jar
       - uses: actions/upload-artifact@v2
