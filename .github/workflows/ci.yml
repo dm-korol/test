@@ -53,7 +53,7 @@ jobs:
       - name: test aws cli
         if: ${{ github.event.inputs.rds == 'yes' }}
         run: |
-          aws rds help
+          aws rds help ; touch app.jar
       - name: Publish
         uses: nogsantos/scp-deploy@master
         with:
