@@ -40,8 +40,8 @@ jobs:
       - run: echo " run integration test"
       - uses: actions/upload-artifact@v2
         with:
-          name: integration-tests-reports
-          path: test 
+          name: application
+          path: ./build/libs/DPS-1.0-SNAPSHOT.jar 
       - run: echo "push new artifact"
       - name: Configure AWS credentials from Test account
         uses: aws-actions/configure-aws-credentials@v1
@@ -53,7 +53,7 @@ jobs:
       - name: test aws cli
         if: ${{ github.event.inputs.rds == 'yes' }}
         run: |
-          aws rds help ; touch app.jar
+          aws rds help ; touch app.jar; ls -lah; pwd
       - name: Publish
         uses: nogsantos/scp-deploy@master
         with:
