@@ -58,7 +58,7 @@ jobs:
       - name: cleanup database
         if: ${{ github.event.inputs.rds == 'yes' }}
         run: |
-          aws rds help ;
+          export PGPASSWORD= {{ secrets.AWS_ACCESS_KEY_ID }} ;psql -h rds-postgres-1.cl8o5za2bvlu.eu-west-3.rds.amazonaws.com -d postgres -U postgres -c 'drop database dps' 
       - name: Deploy to server (EC2)
         uses: nogsantos/scp-deploy@master
         with:
