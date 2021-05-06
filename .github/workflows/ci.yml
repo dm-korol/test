@@ -58,7 +58,7 @@ jobs:
       - name: cleanup database
         if: ${{ github.event.inputs.rds == 'yes' }}
         run: |
-          export PGPASSWORD= ${{ secrets.PG_PASSWORD }} ; psql -h rds-postgres-1.cl8o5za2bvlu.eu-west-3.rds.amazonaws.com -d postgres -U postgres -c 'drop database dps' -c 'create database dps'; \
+          export PGPASSWORD=${{ secrets.PG_PASSWORD }} ; psql -h rds-postgres-1.cl8o5za2bvlu.eu-west-3.rds.amazonaws.com -d postgres -U postgres -c 'drop database dps' -c 'create database dps'; \
           psql -h rds-postgres-1.cl8o5za2bvlu.eu-west-3.rds.amazonaws.com -d dps -U postgres < src/main/resources/database/initdb.sql ; \
           psql -h rds-postgres-1.cl8o5za2bvlu.eu-west-3.rds.amazonaws.com -d dps -U postgres < src/main/resources/database/fill_static_data.sql ; 
       - name: Deploy to server (EC2)
